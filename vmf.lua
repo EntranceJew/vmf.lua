@@ -71,23 +71,23 @@ function vmf.load(filename)
 				-- line begins with quotes, we found tokens
 				token_key, token_value = getQuotedTokens(tline)
 				ct[token_key] = token_value
-				print("found tokens", token_key, token_value)
+				--print("found tokens", token_key, token_value)
 			elseif tline:find("^{") then
 				-- line begins with brace, enter structure
 				-- increase depth and note the key
 				table.insert(keys, last_key)
-				print("entering struct for", last_key)
+				--print("entering struct for", last_key)
 				
 				-- if this key has no other records, make room for records of this type
 				-- e.g. 'versioninfo'
 				-- t = { __root__ = { versioninfo = {} } }
-				if not ct then
-					print("help")
-				end
+				--if not ct then
+					--print("help")
+				--end
 				
 				if not ct[last_key] then
 					-- testing for first-of-name
-					print("christened value", last_key)
+					--print("christened value", last_key)
 					ct[last_key] = {}
 				end
 				
@@ -97,7 +97,7 @@ function vmf.load(filename)
 				-- make a new record, leave a trail
 				ct[#ct+1] = {}
 				last_key = #ct
-				print("entering struct for", last_key)
+				--print("entering struct for", last_key)
 				table.insert(keys, last_key)
 				ct = ct[last_key]
 				--[[
@@ -110,11 +110,11 @@ function vmf.load(filename)
 			elseif tline:find("^}") then
 				-- line ends with brace, exit structure
 				-- decrease depth and unset the key
-				print("exiting struct for", last_key)
+				--print("exiting struct for", last_key)
 				keys[#keys] = nil
 				last_key = keys[#keys]
-				print("now in", last_key)
-				print("exiting struct for", last_key)
+				--print("now in", last_key)
+				--print("exiting struct for", last_key)
 				keys[#keys] = nil
 				last_key = keys[#keys]
 				print("now in", last_key)
@@ -125,11 +125,11 @@ function vmf.load(filename)
 					ct = ct[keys[i]]
 					last_key = keys[i]
 				end
-				print("verifying", last_key)
+				--print("verifying", last_key)
 			else
 				-- plaintext key, likely the start of a structure
 				last_key = tline
-				print("found key", last_key)
+				--print("found key", last_key)
 			end
 		end
 	end
