@@ -77,9 +77,6 @@ function vmf.load(filename)
 				-- increase depth and note the key
 				table.insert(keys, last_key)
 				print("entering struct for", last_key)
-				if last_key == 'visgroup' then
-					print_r( t )
-				end
 				
 				-- if this key has no other records, make room for records of this type
 				-- e.g. 'versioninfo'
@@ -98,7 +95,7 @@ function vmf.load(filename)
 				ct = ct[last_key]
 				
 				-- make a new record, leave a trail
-				ct[#ct] = {}
+				ct[#ct+1] = {}
 				last_key = #ct
 				print("entering struct for", last_key)
 				table.insert(keys, last_key)
